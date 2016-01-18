@@ -1,6 +1,6 @@
 # Create a Virtual Machine from a User Image
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fnavalev%2Fnavalev%2FARM_Templates%2Fblob%2Fmaster%2Fdeploy-vm-data%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fnavalev%2FARM_Templates%2Fblob%2Fmaster%2Fdeploy-vm-data%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 

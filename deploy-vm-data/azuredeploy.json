@@ -56,7 +56,7 @@
     },
     "location": {
       "type": "string",
-      "defaultValue" : "West Europe"
+      "defaultValue" : "West Europe",
       "metadata": {
       "description": "Location where resources will be deployed"
       }

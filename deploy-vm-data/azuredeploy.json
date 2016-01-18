@@ -56,37 +56,14 @@
     },
     "location": {
       "type": "string",
-      "allowedValues": [
-        "West US",
-        "East US",
-        "East Asia",
-        "Southeast Asia",
-        "West Europe"
-      ],
+      "defaultValue" : "West Europe"
       "metadata": {
       "description": "Location where resources will be deployed"
       }
     },    
     "vmSize": {
       "type": "string",
-      "defaultValue": "Standard_A3",
-      "allowedValues": [
-        "Standard_A3",
-        "Standard_A4",
-        "Standard_A5",
-        "Standard_A6",
-        "Standard_A7",
-        "Standard_A8",
-        "Standard_A9",
-        "Standard_A10",
-        "Standard_A11",
-        "Standard_D3",
-        "Standard_D4",
-        "Standard_D12",
-        "Standard_D13",
-        "Standard_D14",
-	"Standard_DS3"
-      ],
+      "defaultValue": "Standard_DS3",
       "metadata": {
         "description": "This is the size of your VM"
       }

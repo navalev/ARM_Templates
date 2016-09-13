@@ -7,15 +7,14 @@
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-Description of Template
-=======================
+
 This template allows you to deploy a simple Windows Virtual Machine from a custom user VHD.
 This will then configure a WinRM https listener by creating a new test certificate (it creates a self signed certificate, so no extra certificate is required).
 
 The template uses a custom script extension which executes the script 'https://raw.githubusercontent.com/navalev/ARM_Templates/master/vm-windows-winrm-user-image/ConfigureWinRM.ps1' on the target machine.
 This script creates a self signed certificate and configures the WinRM Https listener using the certificate's thumbprint.
 
-**Note** that the new Virtual Machine disks will be created in the same storage account where the disk image is stored in.
+**Note** that the new Virtual Machine will be created in the *same storage account*  and *same resource group* where the disk image is stored in.
 
 How to create a Custom user VHD
 ===============================

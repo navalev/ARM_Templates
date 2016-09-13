@@ -1,4 +1,4 @@
-# Deploys a Windows VM and Configures a WinRM Https listener. It creates a self signed certificate, so no extra certificate is required.
+# Deploys a Windows VM from a custom image and Configures a WinRM Https listener
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fnavalev%2FARM_Templates%2Fmaster%2Fvm-windows-winrm-user-image%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
@@ -10,7 +10,7 @@
 Description of Template
 =======================
 This template allows you to deploy a simple Windows Virtual Machine from a custom user VHD.
-This will then configure a WinRM https listener by creating a new test certificate.
+This will then configure a WinRM https listener by creating a new test certificate (it creates a self signed certificate, so no extra certificate is required).
 
 The template uses a custom script extension which executes the script 'https://raw.githubusercontent.com/navalev/ARM_Templates/master/vm-windows-winrm-user-image/ConfigureWinRM.ps1' on the target machine.
 This script creates a self signed certificate and configures the WinRM Https listener using the certificate's thumbprint.

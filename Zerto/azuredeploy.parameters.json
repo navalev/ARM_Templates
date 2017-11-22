@@ -1,0 +1,25 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {        
+        "vmAdminUserName": {
+            "value": "yourusername"
+        },
+        "vmAdminPassword": {
+            "value": "GEN-PASSWORD"
+        },        
+        "storageAccountType": {
+            "value" : "Premium_LRS"
+            
+          },
+          "vmName": {
+            "value" : "zca"
+          },          
+          "pipDnsName": {
+           "value" : "zcadns"
+          },
+          "nsgName": {
+            "value": "zca-nsg"
+          }
+   }
+}

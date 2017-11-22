@@ -1,4 +1,4 @@
-#Deploy Zerto Virtual Replication to Azure
+# Deploy Zerto Virtual Replication to Azure
 
 This templates deploys a virtual network, public ip, network interface and a Zerto virtual machine. It also provisions a network security group to enable RDP to the VM.
 

@@ -1,25 +1,63 @@
 {
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {        
-        "vmAdminUserName": {
-            "value": "yourusername"
-        },
-        "vmAdminPassword": {
-            "value": "GEN-PASSWORD"
-        },        
-        "storageAccountType": {
-            "value" : "Premium_LRS"
-            
-          },
-          "vmName": {
-            "value" : "zca"
-          },          
-          "pipDnsName": {
-           "value" : "zcadns"
-          },
-          "nsgName": {
-            "value": "zca-nsg"
-          }
-   }
-}
+    "parameters": {
+      "vpnType": {
+        "value": "RouteBased"
+      },
+      "localGatewayName": {
+        "value": "localGateway"
+      },
+      "localGatewayIpAddress": {
+        "value": "52.25.48.88"
+      },
+      "localAddressPrefix": {
+        "value": "10.0.0.0/24"
+      },
+      "virtualNetworkName": {
+        "value": "azureVnet"
+      },
+      "azureVNetAddressPrefix": {
+        "value": "10.3.0.0/16"
+      },
+      "subnetName": {
+        "value": "Subnet1"
+      },
+      "subnetPrefix": {
+        "value": "10.3.0.0/24"
+      },
+      "gatewaySubnetPrefix": {
+        "value": "10.3.200.0/29"
+      },
+      "gatewayPublicIPName": {
+        "value": "azureGatewayIP"
+      },
+      "gatewayName": {
+        "value": "azureGateway"
+      },
+      "gatewaySku": {
+        "value": "Basic"
+      },
+      "connectionName": {
+        "value": "Azure2Other"
+      },
+      "sharedKey": {
+        "value": "GEN-UNIQUE"
+      },
+      "vmName": {
+        "value": "zca"
+      },
+      "adminUsername": {
+        "value": "username"
+      },
+      "adminPassword": {
+        "value": "GEN_PASSWORD"
+      },
+      "storageAccountType": {
+        "value": "Premium_LRS"
+      },
+      "nsgName": {
+        "value": "zca-nsg"
+      }
+    }
+  }

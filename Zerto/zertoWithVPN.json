@@ -147,12 +147,6 @@
          "metadata":{
             "description":"Storage Account Type"
          }
-      },
-      "nsgName":{
-         "type":"string",
-         "metadata":{
-            "description":"Name for Network Interface"
-         }
       }
    },
    "variables":{
@@ -165,11 +159,13 @@
       "vmPublicIPName":"[concat(parameters('vmName'), '-publicIP')]",
       "storageAccountName":"[concat('zerto', uniqueString(resourceGroup().id))]",
       "vmSize":"Standard_DS2_v2",
-      "vmOSDiskName":"vmOSDisk"
+      "vmOSDiskName":"vmOSDisk",
+      "nsgName": "zca-nsg"
    },
    "resources":[
       {
-         "apiVersion":"2015-06-15",
+        "condition": "[equals(parameters('deployVPNGateway'), 'Yes')]",
+         "apiVersion":"2017-03-01",
          "type":"Microsoft.Network/localNetworkGateways",
          "name":"[parameters('localGatewayName')]",
          "location":"[resourceGroup().location]",
@@ -183,7 +179,8 @@
          }
       },
       {
-         "apiVersion":"2015-06-15",
+        "condition": "[equals(parameters('deployVPNGateway'), 'Yes')]",
+         "apiVersion":"2017-03-01",
          "name":"[parameters('connectionName')]",
          "type":"Microsoft.Network/connections",
          "location":"[resourceGroup().location]",
@@ -204,7 +201,7 @@
          }
       },
       {
-         "apiVersion":"2015-06-15",
+         "apiVersion":"2017-03-01",
          "type":"Microsoft.Network/virtualNetworks",
          "name":"[parameters('virtualNetworkName')]",
          "location":"[resourceGroup().location]",
@@ -223,7 +220,7 @@
                },
                {
                   "name":"GatewaySubnet",
-                  "properties":{
+                  "properties":{                    
                      "addressPrefix":"[parameters('gatewaySubnetPrefix')]"
                   }
                }
@@ -231,7 +228,8 @@
          }
       },
       {
-         "apiVersion":"2015-06-15",
+        "condition": "[equals(parameters('deployVPNGateway'), 'Yes')]",
+         "apiVersion":"2017-03-01",
          "type":"Microsoft.Network/publicIPAddresses",
          "name":"[parameters('gatewayPublicIPName')]",
          "location":"[resourceGroup().location]",
@@ -240,7 +238,7 @@
          }
       },
       {
-         "apiVersion":"2015-06-15",
+         "apiVersion":"2017-03-01",
          "type":"Microsoft.Network/publicIPAddresses",
          "name":"[variables('vmPublicIPName')]",
          "location":"[resourceGroup().location]",
@@ -249,16 +247,18 @@
          }
       },
       {
-         "apiVersion":"2015-05-01-preview",
+         "apiVersion":"2017-06-01",
          "name":"[variables('storageAccountName')]",
          "location":"[resourceGroup().location]",
-         "type":"Microsoft.Storage/storageAccounts",
-         "properties":{
-            "accountType":"[parameters('storageAccountType')]"
-         }
+         "type":"Microsoft.Storage/storageAccounts",        
+         "sku": {
+            "name": "[parameters('storageAccountType')]"
+          },
+          "kind": "Storage"
       },
       {
-         "apiVersion":"2015-06-15",
+        "condition": "[equals(parameters('deployVPNGateway'), 'Yes')]",
+         "apiVersion":"2017-03-01",
          "type":"Microsoft.Network/virtualNetworkGateways",
          "name":"[parameters('gatewayName')]",
          "location":"[resourceGroup().location]",
@@ -291,14 +291,14 @@
          }
       },
       {
-         "apiVersion":"2015-06-15",
+         "apiVersion":"2017-03-01",
          "type":"Microsoft.Network/networkInterfaces",
          "name":"[variables('nicName')]",
          "location":"[resourceGroup().location]",
          "dependsOn":[
             "[concat('Microsoft.Network/publicIPAddresses/', variables('vmPublicIPName'))]",
             "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
-            "[concat('Microsoft.Network/virtualNetworkGateways/', parameters('gatewayName'))]"
+            "[if(equals(parameters('deployVPNGateway'), 'Yes'), concat('Microsoft.Network/virtualNetworkGateways/', parameters('gatewayName')), concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName')))]"            
          ],
          "properties":{
             "ipConfigurations":[
@@ -316,7 +316,7 @@
                }
             ],
             "networkSecurityGroup":{
-               "id":"[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
+               "id":"[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
             }
          }
       },
@@ -324,7 +324,7 @@
          "name":"[parameters('vmName')]",
          "type":"Microsoft.Compute/virtualMachines",
          "location":"[resourceGroup().location]",
-         "apiVersion":"2015-06-15",
+         "apiVersion":"2017-03-30",
          "dependsOn":[
             "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
             "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
@@ -373,8 +373,8 @@
       },
       {
          "type":"Microsoft.Network/networkSecurityGroups",
-         "name":"[parameters('nsgName')]",
-         "apiVersion":"2017-06-01",
+         "name":"[variables('nsgName')]",
+         "apiVersion":"2017-03-01",
          "location":"[resourceGroup().location]",
          "properties":{
             "securityRules":[

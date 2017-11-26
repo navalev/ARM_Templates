@@ -55,9 +55,6 @@
       },
       "storageAccountType": {
         "value": "Premium_LRS"
-      },
-      "nsgName": {
-        "value": "zca-nsg"
       }
     }
   }

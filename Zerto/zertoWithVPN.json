@@ -1,17 +1,7 @@
 {
    "$schema":"http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
    "contentVersion":"1.0.0.0",
-   "parameters":{
-      "deployVPNGateway":{
-         "type":"string",
-         "allowedValues":[
-            "Yes",
-            "No"
-         ],
-         "metadata":{
-            "description":"Select whether deploy an Azure VPN gatewayand connect to your on prem network."
-         }
-      },
+   "parameters":{      
       "vpnType":{
          "type":"string",
          "metadata":{
@@ -163,8 +153,7 @@
       "nsgName": "zca-nsg"
    },
    "resources":[
-      {
-        "condition": "[equals(parameters('deployVPNGateway'), 'Yes')]",
+      {        
          "apiVersion":"2017-03-01",
          "type":"Microsoft.Network/localNetworkGateways",
          "name":"[parameters('localGatewayName')]",
@@ -178,8 +167,7 @@
             "gatewayIpAddress":"[parameters('localGatewayIpAddress')]"
          }
       },
-      {
-        "condition": "[equals(parameters('deployVPNGateway'), 'Yes')]",
+      {        
          "apiVersion":"2017-03-01",
          "name":"[parameters('connectionName')]",
          "type":"Microsoft.Network/connections",
@@ -227,8 +215,7 @@
             ]
          }
       },
-      {
-        "condition": "[equals(parameters('deployVPNGateway'), 'Yes')]",
+      {        
          "apiVersion":"2017-03-01",
          "type":"Microsoft.Network/publicIPAddresses",
          "name":"[parameters('gatewayPublicIPName')]",
@@ -256,8 +243,7 @@
           },
           "kind": "Storage"
       },
-      {
-        "condition": "[equals(parameters('deployVPNGateway'), 'Yes')]",
+      {        
          "apiVersion":"2017-03-01",
          "type":"Microsoft.Network/virtualNetworkGateways",
          "name":"[parameters('gatewayName')]",
@@ -298,7 +284,7 @@
          "dependsOn":[
             "[concat('Microsoft.Network/publicIPAddresses/', variables('vmPublicIPName'))]",
             "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
-            "[if(equals(parameters('deployVPNGateway'), 'Yes'), concat('Microsoft.Network/virtualNetworkGateways/', parameters('gatewayName')), concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName')))]"            
+            "[concat('Microsoft.Network/virtualNetworkGateways/', parameters('gatewayName'))]"
          ],
          "properties":{
             "ipConfigurations":[

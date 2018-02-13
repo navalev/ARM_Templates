@@ -31,6 +31,7 @@
       }
     },
     "variables": {  
+	  "vnetName" : "vnet",
       "vmName":"zca-vm",    
       "vnetPrefix": "10.1.2.0/24",
 	  "vnetSubnetPrefix" : "10.1.2.32/27",
@@ -60,7 +61,7 @@
         "kind": "Storage"
       },
       {
-        "name": "vnet",
+        "name": "[variables('vnetName')]",
         "type": "Microsoft.Network/virtualNetworks",
         "location": "[resourceGroup().location]",
         "apiVersion": "2016-03-30",

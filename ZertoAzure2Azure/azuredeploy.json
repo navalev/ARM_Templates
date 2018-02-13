@@ -14,7 +14,11 @@
                     "uri": "https://raw.githubusercontent.com/navalev/ARM_Templates/master/ZertoAzure2Azure/source.json",
                     "contentVersion": "1.0.0.0"
                 }
-            }
+            },
+			"parameters" : {
+				"vmAdminUserName" : "zerto",
+				"vmAdminPassword" : "ZertoAzure123"
+			}
         },
         {
             "apiVersion": "2017-05-10",
@@ -26,7 +30,11 @@
                     "uri": "https://raw.githubusercontent.com/navalev/ARM_Templates/master/ZertoAzure2Azure/target.json",
                     "contentVersion": "1.0.0.0"
                 }
-            }
+            },
+			"parameters" : {
+				"vmAdminUserName" : "zerto",
+				"vmAdminPassword" : "ZertoAzure123"
+			}
         }
     ]
 }

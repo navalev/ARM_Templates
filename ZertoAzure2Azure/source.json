@@ -31,18 +31,18 @@
       }
     },
     "variables": {  
-      "vmName":"zca-vm",    
+      "vmName":"source-zca-vm",    
       "vnetPrefix": "10.1.1.0/24",
 	  "vnetSubnetPrefix" : "10.1.1.32/27",
       "vnetSubnetName": "Subnet-1",   
-      "vmOSDiskName": "vmOSDisk",
+      "vmOSDiskName": "source-vmOSDisk",
       "vmVmSize": "Standard_DS3_v2",      
       "vmSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'vnet', variables('vnetSubnetName'))]",
       "vmStorageAccountContainerName": "vhds",
-      "vmNicName": "[concat(variables('vmName'), 'NetworkInterface')]",
-      "pipName": "pip",
-      "nsgName" : "zca-nsg",
-      "newStorageAccountName": "[concat('zerto', uniqueString(resourceGroup().id))]"        
+      "vmNicName": "[concat('source-', variables('vmName'), 'NetworkInterface')]",
+      "pipName": "source-pip",
+      "nsgName" : "zsource-ca-nsg",
+      "newStorageAccountName": "[concat('source-zerto', uniqueString(resourceGroup().id))]"        
     },
     "resources": [
       {

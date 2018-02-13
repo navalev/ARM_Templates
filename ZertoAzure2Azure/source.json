@@ -38,7 +38,7 @@
       "vnetSubnetName": "Subnet-1",   
       "vmOSDiskName": "source-vmOSDisk",
       "vmVmSize": "Standard_DS3_v2",      
-      "vmSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'vnet', variables('vnetSubnetName'))]",
+      "vmSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName') ,variables('vnetSubnetName'))]",
       "vmStorageAccountContainerName": "vhds",
       "vmNicName": "[concat('source-', variables('vmName'), 'NetworkInterface')]",
       "pipName": "source-pip",
@@ -91,7 +91,7 @@
         "location": "[resourceGroup().location]",
         "apiVersion": "2016-03-30",
         "dependsOn": [
-          "[resourceId('Microsoft.Network/virtualNetworks', 'vnet')]",
+          "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]",
           "[resourceId('Microsoft.Network/publicIPAddresses', variables('pipName'))]"
         ],
         "tags": {

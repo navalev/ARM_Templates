@@ -42,7 +42,7 @@
       "vmNicName": "[concat('source-', variables('vmName'), 'NetworkInterface')]",
       "pipName": "source-pip",
       "nsgName" : "zsource-ca-nsg",
-      "newStorageAccountName": "[concat('source-zerto', uniqueString(resourceGroup().id))]"        
+      "newStorageAccountName": "[concat('sourcezerto', uniqueString(resourceGroup().id))]"        
     },
     "resources": [
       {

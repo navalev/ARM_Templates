@@ -80,12 +80,6 @@
               "properties": {
                 "addressPrefix": "[variables('vnetSubnetPrefix')]"
               }
-            },
-            {
-              "name": "[variables('vnetSubnet2Name')]",
-              "properties": {
-                "addressPrefix": "[variables('vnetSubnet2Prefix')]"
-              }
             }
           ]
         }

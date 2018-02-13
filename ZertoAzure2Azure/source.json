@@ -33,7 +33,7 @@
     "variables": {  
       "vmName":"zca-vm",    
       "vnetPrefix": "10.1.1.0/24",
-	  "vnetSubnetPrefix" : "10.1.1.32/27"
+	  "vnetSubnetPrefix" : "10.1.1.32/27",
       "vnetSubnetName": "Subnet-1",   
       "vmOSDiskName": "vmOSDisk",
       "vmVmSize": "Standard_DS3_v2",      

@@ -1,7 +1,21 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {},
+    "parameters": {
+		"vmAdminUserName": {
+        "type": "string",
+        "minLength": 1,
+        "metadata": {
+            "description" : "Virtual Machine user name"
+        }
+      },
+      "vmAdminPassword": {
+        "type": "securestring",
+        "metadata": {
+            "description" : "Virtual Machine password"
+        }
+      }
+	},
     "variables": {},
     "resources": [
 	{
@@ -14,11 +28,7 @@
                     "uri": "https://raw.githubusercontent.com/navalev/ARM_Templates/master/ZertoAzure2Azure/source.json",
                     "contentVersion": "1.0.0.0"
                 }
-            },
-			"parameters" : {
-				"vmAdminUserName" : "zerto",
-				"vmAdminPassword" : "ZertoAzure123"
-			}
+            }
         },
         {
             "apiVersion": "2017-05-10",
@@ -30,11 +40,7 @@
                     "uri": "https://raw.githubusercontent.com/navalev/ARM_Templates/master/ZertoAzure2Azure/target.json",
                     "contentVersion": "1.0.0.0"
                 }
-            },
-			"parameters" : {
-				"vmAdminUserName" : "zerto",
-				"vmAdminPassword" : "ZertoAzure123"
-			}
+            }
         }
     ]
 }

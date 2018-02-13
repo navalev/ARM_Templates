@@ -76,7 +76,7 @@
           },
           "subnets": [
             {
-              "name": "[variables('vnetSubnet1Name')]",
+              "name": "[variables('vnetSubnetName')]",
               "properties": {
                 "addressPrefix": "[variables('vnetSubnetPrefix')]"
               }

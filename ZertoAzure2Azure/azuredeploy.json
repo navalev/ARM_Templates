@@ -34,13 +34,33 @@
 				}
             }			
         },
+		{
+            "apiVersion": "2017-05-10",
+            "name": "add-vms",
+            "type": "Microsoft.Resources/deployments",	
+			"dependsOn": [
+                "source"
+            ],			
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/navalev/ARM_Templates/master/ZertoAzure2Azure/addVMs.json",
+                    "contentVersion": "1.0.0.0"
+                },
+				"parameters":{
+					"adminUsername": {"value": "[parameters('vmAdminUserName')]"},
+					"adminPassword": {"value": "[parameters('vmAdminPassword')]"},
+					"virtualNetworkName": {"value": "source-vnet"},
+					"subnetName": {"value": "Subnet-1"}
+				}
+            }			
+        },
         {
             "apiVersion": "2017-05-10",
             "name": "target",
             "type": "Microsoft.Resources/deployments",	
 			"dependsOn": [
-                "source",
-				"target"
+                "source"
             ],			
             "properties": {
                 "mode": "incremental",
@@ -60,7 +80,8 @@
             "name": "peering",
             "type": "Microsoft.Resources/deployments",	
 			"dependsOn": [
-                "source"
+                "source",
+				"target"
             ],			
             "properties": {
                 "mode": "incremental",

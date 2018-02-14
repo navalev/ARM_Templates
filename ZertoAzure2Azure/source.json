@@ -42,7 +42,7 @@
       "vmStorageAccountContainerName": "vhds",
       "vmNicName": "[concat('source-', variables('vmName'), 'NetworkInterface')]",
       "pipName": "source-pip",
-      "nsgName" : "zsource-ca-nsg",
+      "nsgName" : "source-zca-nsg",
       "newStorageAccountName": "[concat('sourcezerto', uniqueString(resourceGroup().id))]"        
     },
     "resources": [

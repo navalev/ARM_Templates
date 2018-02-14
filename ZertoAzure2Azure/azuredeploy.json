@@ -37,7 +37,10 @@
         {
             "apiVersion": "2017-05-10",
             "name": "target",
-            "type": "Microsoft.Resources/deployments",			
+            "type": "Microsoft.Resources/deployments",	
+			"dependsOn": [
+                "source"
+            ],			
             "properties": {
                 "mode": "incremental",
                 "templateLink": {
@@ -45,8 +48,28 @@
                     "contentVersion": "1.0.0.0"
                 },
 				"parameters":{
-					"vmAdminUserName":{"value": "[parameters('vmAdminUserName')]"},
-					"vmAdminPassword":{"value": "[parameters('vmAdminPassword')]"}
+					"vmAdminUserName": {"value": "[parameters('vmAdminUserName')]"},
+					"vmAdminPassword": {"value": "[parameters('vmAdminPassword')]"}
+					"remoteVnetName" : {"value": "source-vnet"}
+				}
+            }			
+        },
+		{
+            "apiVersion": "2017-05-10",
+            "name": "peering",
+            "type": "Microsoft.Resources/deployments",	
+			"dependsOn": [
+                "source"
+            ],			
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/navalev/ARM_Templates/master/ZertoAzure2Azure/addPeering.json",
+                    "contentVersion": "1.0.0.0"
+                },
+				"parameters":{
+					"existingLocalVirtualNetworkName":{"value": "source-vnet"},
+					"existingRemoteVirtualNetworkName":{"value": "vnet"}
 				}
             }			
         }

@@ -39,7 +39,8 @@
             "name": "target",
             "type": "Microsoft.Resources/deployments",	
 			"dependsOn": [
-                "source"
+                "source",
+				"target"
             ],			
             "properties": {
                 "mode": "incremental",

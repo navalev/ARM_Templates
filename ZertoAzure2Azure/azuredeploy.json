@@ -49,7 +49,7 @@
                 },
 				"parameters":{
 					"vmAdminUserName": {"value": "[parameters('vmAdminUserName')]"},
-					"vmAdminPassword": {"value": "[parameters('vmAdminPassword')]"}
+					"vmAdminPassword": {"value": "[parameters('vmAdminPassword')]"},
 					"remoteVnetName" : {"value": "source-vnet"}
 				}
             }			

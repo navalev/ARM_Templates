@@ -7,9 +7,6 @@
       },
       "vmAdminPassword":{  
          "value":"GEN-PASSWORD"
-      },
-      "dnsNameForPublicIP":{  
-         "value":"GEN-UNIQUE"
       }
    }
 }

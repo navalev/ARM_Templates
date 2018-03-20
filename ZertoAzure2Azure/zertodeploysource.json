@@ -16,7 +16,10 @@
         }
       }
 	},
-    "variables": {},
+    "variables": {
+        "vnetName" : "source-vnet",
+        "vnetSubnetName": "Subnet-1"
+    },
     "resources": [
 	{
             "apiVersion": "2017-05-10",
@@ -30,7 +33,9 @@
                 },
 				"parameters":{
 					"vmAdminUserName":{"value": "[parameters('vmAdminUserName')]"},
-					"vmAdminPassword":{"value": "[parameters('vmAdminPassword')]"}
+                    "vmAdminPassword":{"value": "[parameters('vmAdminPassword')]"},
+                    "virtualNetworkName": {"value" : "[variables('vnetName')]"},
+					"subnetName": {"value" : "[variables('vnetSubnetName')]"}
 				}
             }			
         },
@@ -50,50 +55,16 @@
 				"parameters":{
 					"adminUsername": {"value": "[parameters('vmAdminUserName')]"},
 					"adminPassword": {"value": "[parameters('vmAdminPassword')]"},
-					"virtualNetworkName": {"value": "source-vnet"},
-					"subnetName": {"value": "Subnet-1"}
-				}
-            }			
-        },
-        {
-            "apiVersion": "2017-05-10",
-            "name": "target",
-            "type": "Microsoft.Resources/deployments",	
-			"dependsOn": [
-                "source"
-            ],			
-            "properties": {
-                "mode": "incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/navalev/ARM_Templates/master/ZertoAzure2Azure/target.json",
-                    "contentVersion": "1.0.0.0"
-                },
-				"parameters":{
-					"vmAdminUserName": {"value": "[parameters('vmAdminUserName')]"},
-					"vmAdminPassword": {"value": "[parameters('vmAdminPassword')]"},
-					"remoteVnetName" : {"value": "source-vnet"}
-				}
-            }			
-        },
-		{
-            "apiVersion": "2017-05-10",
-            "name": "peering",
-            "type": "Microsoft.Resources/deployments",	
-			"dependsOn": [
-                "source",
-				"target"
-            ],			
-            "properties": {
-                "mode": "incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/navalev/ARM_Templates/master/ZertoAzure2Azure/addPeering.json",
-                    "contentVersion": "1.0.0.0"
-                },
-				"parameters":{
-					"existingLocalVirtualNetworkName":{"value": "source-vnet"},
-					"existingRemoteVirtualNetworkName":{"value": "vnet"}
+					"virtualNetworkName": {"value" : "[variables('vnetName')]"},
+					"subnetName": {"value" : "[variables('vnetSubnetName')]"}
 				}
             }			
         }
-    ]
+    ],
+    "outputs": {
+        "vnet": {
+            "type": "string",
+            "value": "[reference('source').outputs.vNet]"
+        }
+    }
 }

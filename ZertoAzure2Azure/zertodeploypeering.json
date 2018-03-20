@@ -2,16 +2,16 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "existingLocalVirtualNetworkName": {
+    "existingSourceVirtualNetworkName": {
       "type": "string",
       "metadata": {
-        "description": "Set the local VNet name"
+        "description": "Source VNet name"
       }
     },
-    "existingRemoteVirtualNetworkName": {
+    "existingTargetVirtualNetworkId": {
       "type": "string",
       "metadata": {
-        "description": "Set the remote VNet name"
+        "description": "Target VNet resource id"
       }
     }    
   },
@@ -20,7 +20,7 @@
       {
         "apiVersion": "2016-06-01",
         "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
-        "name": "[concat(parameters('existingLocalVirtualNetworkName'), '/source2targetPeering')]",
+        "name": "[concat(parameters('existingSourceVirtualNetworkName'), '/source2targetPeering')]",
         "location": "[resourceGroup().location]",
         "properties": {
           "allowVirtualNetworkAccess": true,
@@ -28,7 +28,7 @@
           "allowGatewayTransit": false,
           "useRemoteGateways": false,
           "remoteVirtualNetwork": {
-            "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('existingRemoteVirtualNetworkName'))]"
+            "id": "[parameters('existingTargetVirtualNetworkId')]"
           }
         }
       }

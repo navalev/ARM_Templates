@@ -29,15 +29,15 @@
             "description" : "Virtual Machine password"
         }
       },
-      "remoteVnetName" : {
+      "remoteVnetResource" : {
         "type": "string",
         "metadata": {
-          "description" : "name of vnet to connect with peering"
+          "description" : "Resource id for the remote vnet to connect with peering"
         }
       }
     },
     "variables": {  
-	  "vnetName" : "vnet",
+	  "vnetName" : "target-vnet",
       "vmName":"zca-vm",    
       "vnetPrefix": "10.1.2.0/24",
 	  "vnetSubnetPrefix" : "10.1.2.32/27",
@@ -105,7 +105,7 @@
                   "allowGatewayTransit": "false",
                   "useRemoteGateways": "false",
                   "remoteVirtualNetwork": {
-                      "id": "[resourceId('Microsoft.Network/virtualNetworks',parameters('remoteVnetName'))]"
+                      "id": "[parameters('remoteVnetResource')]"
                   }
               }
           }
@@ -236,6 +236,11 @@
           }
       
     ],
-    "outputs": {}
+    "outputs": {
+      "vNet" : {
+        "type" : "string",
+        "value" : "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
+      }
+    }
   }
   

@@ -62,9 +62,13 @@
         }
     ],
     "outputs": {
-        "vnet": {
+        "vNet": {
             "type": "string",
-            "value": "[reference('source').outputs.vNet]"
+            "value": "[reference('source').outputs.vNet.value]"
+        },
+        "vNetName" : {
+            "type": "string",
+            "value": "[variables('vnetName')]"
         }
     }
 }
